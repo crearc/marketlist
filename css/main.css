@@ -1,0 +1,70 @@
+.stock-list {	
+}
+
+.stock-list li, .folder-list li {
+	list-style-type: none;
+	padding: 10px;
+	background-color: #eee;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.stock-list li:hover, .folder-list li:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+.folder-list li {
+	padding: 20px;
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+	margin-bottom: 10px; 
+	float: left;
+	text-align: center;
+}
+
+.close {
+	font-size: 18px;
+	color: #333;
+	float: right;
+	cursor: pointer;
+	position: relative;
+	top: -3px;
+}
+
+.close:hover {
+	color: #d80c0c;
+}
+
+input {
+	padding: 10px;
+	border: 1px solid #eee;
+	background-color: #efefef;
+}
+
+#new-item {
+	margin: 0 0 5px 0;
+	-webkit-box-sizing: border-box; 
+  	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;  
+}
+
+.add-item {
+	-webkit-box-sizing: border-box; 
+  	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;      
+	text-align: center;
+	background-color: #55b239;
+	padding: 8px;
+	border: 1px solid #55b239;
+	color: #fff !important;
+}
+
+.add-item:hover {
+	background-color: #84d356;
+}
+
+/* emmt
+	zen coding
+ */
