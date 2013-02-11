@@ -5,21 +5,27 @@
 		this.currTicker = null;
 		this.currKey = 0;
 		this.folders = {};
+		this.load();
+		this.renderFolders();
 	}
 
+	//.animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
+
 	Stocker.prototype = {
-		addFolder: function(name) {
-			var folder = new Folder(this.currKey, name);
+		addFolder: function(fname) {
+			var folder = new Folder(this.currKey, fname, this);
 			this.currKey++;
-			this.folders[folder.key] = folder;
+			this.folders[fname] = folder;
+			this.save();
 		},
 
 		removeFolder: function(key) {
 			delete this.folders[key];
 		},
 
-		getFolders: function() {
-			return this.folders;
+		getFolder: function(key) {
+			this.currFolder = this.folders[key];
+			return this.folders[key];
 		},
 
 		renderFolders: function() {
@@ -27,7 +33,7 @@
 			for(fold in this.folders) {
 				list = list + this.folders[fold].render();
 			}
-			return '<ul>\n' + list + '</ul>';
+			$('.folder-list').html(list);
 		},
 
 		renderStocks: function() {
@@ -35,14 +41,41 @@
 			for(fold in this.folders) {
 				list = list + this.folders[fold].render();
 			}
-			return '<ul class="stock-list grid_8 alpha omega">' + list + '</ul>';
+			return list;
+			//return '<ul class="stock-list grid_8 alpha omega">' + list + '</ul>';
+		},
+
+		save: function() {
+/*			for(f in this.folders) {
+				this.folders[f].stocker = null;
+			}*/
+			localStorage.setItem("stocker", JSON.stringify(this));
+		},
+
+		load: function() {
+			var cache = JSON.parse(localStorage.getItem("stocker"));
+			console.log(cache);
+			for(f in cache.folders) {
+				var fold = cache.folders[f];
+				this.folders[fold.fname] = new Folder(fold.key, fold.fname, fold.stocker, fold.tickers);
+			}
+			console.log(this.folders);
+			this.currKey = cache.currKey;
+			this.currFolder = cache.currFolder;
 		}
 	}
 
-	var Folder = Stocker.Folder = function(key, name) {
+	var Folder = Stocker.Folder = function(key, fname, stocker, tickers) {
 		this.key = key;
-		this.name = name;
+		this.fname = fname;
 		this.tickers = {};
+		if(tickers) {
+			for(t in tickers) {
+				var tick = tickers[t];
+				this.tickers[tick.quote] = new Ticker(tick.quote, this);
+			}
+		}
+		// this.stocker = stocker;
 	}
 
 
@@ -52,30 +85,37 @@
 		},
 
 		addTicker: function(ticker) {
-			var list = JSON.parse(localStorage.getItem(this.key));
-			list.push(ticker);
-			localStorage.setItem(this.key, JSON.stringify(list));
+			var tick = this.tickers[ticker] = new Ticker(ticker, this);
+			window.Stocks.save();
+			return tick;
 		},
 
 		removeTicker: function(ticker) {
-			var list = JSON.parse(localStorage.getItem(this.key));
-			list.pop(ticker);
-			localStorage.setItem(this.key, JSON.stringify(list));
+			delete this.tickers[ticker];
+			window.Stocks.save();
 		},
 
 		render: function () {
-			return "<li>" + this.name + "</li>\n";
-		}
+			return "<li>" + this.fname + "</li>\n";
+		},
+
+		renderStocks: function() {
+			var list = "";
+			for(t in this.tickers) {
+				list = list + this.tickers[t].render();
+			}
+			return list;
+		},
 	}
 
 	var Ticker = Stocker.Ticker = function(quote, folder) {
 		this.quote = quote.toUpperCase();
-		this.folder = folder;
+		//this.folder = folder;
 	}
 
 	Ticker.prototype = {
 		render: function() {
-			return '<li><span class="quote">' + this.quote + '</span><span class="close">&#10006;</span></li>';
+			return '<li><span class="quote">' + this.quote + '</span><span class="close">&#10006;</span></li>\n';
 		},
 	}
 

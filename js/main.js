@@ -1,13 +1,15 @@
 $(document).ready(function(){
 
-	Stocks = new window.Stocker();
+	window.Stocks = new window.Stocker();
 
+	$('.folder-list li').live('click', function() {
+		console.log(Stocks.getFolder($(this).text()));
+		$('.stock-list').html(Stocks.getFolder($(this).text()).renderStocks());
+	});
 
 	$('.stock-list li .close').live('click', function() {
 		$(this).parent().animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
-		var list = JSON.parse(localStorage.getItem("stocks"));
-		list.pop($(this).parent());
-		localStorage.setItem("stocks", JSON.stringify(list));
+		Stocks.currFolder.removeTicker($(this).parent().children('.quote').text());
 	});
 
 	$('.stock-list li').live('click', function() {
@@ -19,28 +21,11 @@ $(document).ready(function(){
 		if(!item) {
 			return;
 		}
-		var ticker = Stocks.currFolder.addTicker(item)
+		var ticker = Stocks.currFolder.addTicker(item);
 		$('.stock-list').append(ticker.render());
 		//$('.close').first().parent().children('.quote').html()
 
 	});
-
-
-	$('.getlist').on('click', function() {
-		var list = JSON.parse(localStorage.getItem("stocks"));
-
-		$('.stock-list').html("").animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
-		for(el in list) {
-			$('.stock-list').append('<li><span class="quote">' + list[el] + '</span><span class="close">&#10006;</span></li>');
-		}
-		$('.stock-list').animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
-	});
-
-	if(!JSON.parse(localStorage.getItem("stocks"))) {
-		var list = ["MSFT", "FB", "AAPL", "EXON"];
-		localStorage.setItem("stocks", JSON.stringify(list));
-	}
-	$('.getlist').click();
 
 });
 
