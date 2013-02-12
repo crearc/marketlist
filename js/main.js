@@ -29,6 +29,12 @@ $(document).ready(function(){
 		$('.stock-list li').last().hide().animate( { height: 'toggle', opacity: 'toggle' }, 'fast' );
 	});
 
+	$('.add-folder').live('click', function() {
+		var folder = Stocks.addFolder($('#new-folder').val());
+		$('#new-folder').val("");
+		$('.folder-list').append(folder.render());
+	});
+
 });
 
 //emmet

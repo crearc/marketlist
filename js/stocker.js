@@ -17,6 +17,7 @@
 			this.currKey++;
 			this.folders[fname] = folder;
 			this.save();
+			return folder;
 		},
 
 		removeFolder: function(key) {
