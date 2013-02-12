@@ -16,7 +16,7 @@ $(document).ready(function(){
 	});
 
 	$('.stock-list li').live('click', function() {
-
+		fetch($($(this).children(".quote")[0]).text());
 	});
 
 	$('.add-item').live('click', function() {
@@ -26,9 +26,7 @@ $(document).ready(function(){
 		}
 		var ticker = Stocks.currFolder.addTicker(item);
 		$('.stock-list').append(ticker.render());
-		.animate( { height: 'toggle', opacity: 'toggle' }, 'fast' );
-		//$('.close').first().parent().children('.quote').html()
-
+		$('.stock-list li').last().hide().animate( { height: 'toggle', opacity: 'toggle' }, 'fast' );
 	});
 
 });

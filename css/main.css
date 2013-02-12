@@ -70,3 +70,9 @@ input {
 /* emmt
 	zen coding
  */
+
+ .det-list li {
+ 	border-bottom: 1px solid #ddd;
+ 	list-style-type: none;
+ 	padding: 5px;
+ }

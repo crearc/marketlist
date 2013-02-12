@@ -10,7 +10,7 @@
 
 
 body {
-  font: 13px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 13px/1.5 'Oxygen', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:#333333;
   word-wrap: break-word;
 }
@@ -150,6 +150,6 @@ figure {
 }
 
 textarea {
-  font: 13px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 13px/1.5 'Oxygen', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:#333333;
 }
