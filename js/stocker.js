@@ -59,6 +59,12 @@
 			}
 			this.currKey = cache.currKey;
 			this.currFolder = cache.currFolder;
+		},
+
+		importJSON: function(json) {
+			localStorage.setItem("stocker", json);
+			this.load();
+			this.renderFolders();
 		}
 	}
 

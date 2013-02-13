@@ -62,7 +62,11 @@ $(document).ready(function(){
 	});
 
 	$('#import-submit').live('click', function() {
-		console.log($('#import-content').val());
+		Stocks.importJSON($('#import-content').val());
+		$(this).before('<a href="#" class="import">import json</a>');
+		$(this).remove();
+		$('#import-content').remove();
+
 	});
 
 	$('.export').live('click', function() {
