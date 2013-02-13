@@ -14,16 +14,9 @@
                 console.log('No stock named by that ticker.');                    
             }
         });
-
-
-        // Create and append the script element to load the data via JSONP
-        /*var scriptElement = document.createElement("script");
-        scriptElement.src = url;
-        $('body').append(scriptElement);*/
     }
 
-    // This function is called by the JavaScript code that is returned from the JSONP request
-    // to the Google Finance API
+    // Callback function after google finance has returned the data
     function processQuotes(data) {
         var quote = data[0];
         var $li = $('<div></div>').html(
