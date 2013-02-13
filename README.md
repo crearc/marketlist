@@ -14,6 +14,7 @@ Adhere to specific style guidelines (Jquery Core)
 3) Anything extra that you did and you think should be looked at.
 
 Fetching of stock quotes
+Imported Google Web Font
 
 4) Sources
 
@@ -21,3 +22,4 @@ Fetching of stock quotes
   D3.js - released under BSD license
   jQuery - MIT Licence
   Google Finance API License
+  Google Web Fonts API ToS

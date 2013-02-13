@@ -9,8 +9,6 @@
 		this.renderFolders();
 	}
 
-	//.animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
-
 	Stocker.prototype = {
 		addFolder: function(fname) {
 			var folder = new Folder(this.currKey, fname, this);
@@ -44,18 +42,17 @@
 				list = list + this.folders[fold].render();
 			}
 			return list;
-			//return '<ul class="stock-list grid_8 alpha omega">' + list + '</ul>';
 		},
 
 		save: function() {
-/*			for(f in this.folders) {
-				this.folders[f].stocker = null;
-			}*/
 			localStorage.setItem("stocker", JSON.stringify(this));
 		},
 
 		load: function() {
 			var cache = JSON.parse(localStorage.getItem("stocker"));
+			if( !cache ) {
+				return
+			}
 			for(f in cache.folders) {
 				var fold = cache.folders[f];
 				this.folders[fold.fname] = new Folder(fold.key, fold.fname, fold.stocker, fold.tickers);

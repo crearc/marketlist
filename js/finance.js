@@ -1,5 +1,6 @@
     function fetch(ticker) {
         // Build the URL according to the Google Finance API specification
+        // Based on https://github.com/mikeplate/mobileapplab-web finance api caller
         var url = "http://www.google.com/finance/info?infotype=infoquoteall&q=";
         url += ticker;
         url += "&callback=processQuotes";
@@ -22,8 +23,8 @@
         var $li = $('<div></div>').html(
             "<h2>" + quote.name + " (" + quote.t +")</h2>" +
             '<ul class="det-list">' +
-            '<li>$' + quote.op + " (" + quote.c + ")</li>" + 
-            '<li>' + quote.shares + '</li>' +
+            '<li>price: $' + quote.op + " (" + quote.c + ")</li>" + 
+            '<li>shares: ' + quote.shares + '</li>' +
             '</ul>');
         $(".details").html("")
             .animate( { height: 'toggle', opacity: 'hide' }, 'fast', function() {

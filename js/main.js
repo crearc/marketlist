@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	//Main stock object containing all the goodies
 	window.Stocks = new window.Stocker();
 
 	$('.folder-list li').live('click', function() {
@@ -52,6 +53,24 @@ $(document).ready(function(){
 		var folder = Stocks.addFolder($('#new-folder').val());
 		$('#new-folder').val("");
 		$('.folder-list').append(folder.render());
+	});
+
+	$('.import').live('click', function() {
+		$(this).after('<a href="#" id="import-submit">load json</a>');
+		$(this).after('<input id="import-content" placeholder="Paste JSON here" type="text">');
+		$(this).remove();
+	});
+
+	$('#import-submit').live('click', function() {
+		console.log($('#import-content').val());
+	});
+
+	$('.export').live('click', function() {
+		// Small code for saving a json file
+		// http://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file
+		var content = JSON.stringify(Stocks);
+		var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
+		var newWindow = window.open(uriContent, 'stocker.json');
 	});
 
 });
