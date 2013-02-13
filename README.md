@@ -20,3 +20,4 @@ Fetching of stock quotes
   Adapt.js and 960.gs - licensed under GPL and MIT
   D3.js - released under BSD license
   jQuery - MIT Licence
+  Google Finance API License
