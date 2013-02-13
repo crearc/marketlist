@@ -1,6 +1,9 @@
 Market List
 ===========
 
+Eric Mills - Web 498 - Frontend Homework
+-----------
+
 1) Additional Features
 
 * Animations on almost all main actions
