@@ -56,12 +56,10 @@
 
 		load: function() {
 			var cache = JSON.parse(localStorage.getItem("stocker"));
-			console.log(cache);
 			for(f in cache.folders) {
 				var fold = cache.folders[f];
 				this.folders[fold.fname] = new Folder(fold.key, fold.fname, fold.stocker, fold.tickers);
 			}
-			console.log(this.folders);
 			this.currKey = cache.currKey;
 			this.currFolder = cache.currFolder;
 		}
@@ -74,7 +72,7 @@
 		if(tickers) {
 			for(t in tickers) {
 				var tick = tickers[t];
-				this.tickers[tick.quote] = new Ticker(tick.quote, this);
+				this.tickers[tick.quote] = new Ticker(tick.quote, tick.isSold);
 			}
 		}
 		// this.stocker = stocker;
@@ -86,8 +84,12 @@
 			return this.tickers;
 		},
 
-		addTicker: function(ticker) {
-			var tick = this.tickers[ticker] = new Ticker(ticker, this);
+		getTicker: function(ticker) {
+			return this.tickers[ticker];
+		},
+
+		addTicker: function(ticker, isSold) {
+			var tick = this.tickers[ticker] = new Ticker(ticker, isSold);
 			window.Stocks.save();
 			return tick;
 		},
@@ -95,6 +97,14 @@
 		removeTicker: function(ticker) {
 			delete this.tickers[ticker];
 			window.Stocks.save();
+		},
+
+		removeSold: function() {
+			for(t in this.tickers) {
+				if(this.tickers[t].isSold) {
+					this.removeTicker(this.tickers[t].quote);
+				}
+			}
 		},
 
 		render: function () {
@@ -110,20 +120,21 @@
 		},
 	}
 
-	var Ticker = Stocker.Ticker = function(quote, folder) {
+	var Ticker = Stocker.Ticker = function(quote, isSold) {
 		this.quote = quote.toUpperCase();
-		this.isSold = false;
-		//this.folder = folder;
-
+		this.isSold = isSold || false;
 	}
 
 	Ticker.prototype = {
 		toggleSold: function() {
-			return this.isSold = !this.isSold;
+			this.isSold = !this.isSold;
+			window.Stocks.save();
+			return this.isSold;
 		},
 
 		render: function() {
-			return '<li><span class="quote">' + this.quote + '</span><span class="sold">&#10004;</span><span class="close">&#10006;</span></li>\n';
+			return '<li class="'+ (this.isSold ? 'sold-li' : 'unsold-li') +'"><span class="quote">' + this.quote + 
+			'</span><span class="close">&#10006;</span><span class="sold-js ' + (this.isSold ? 'sold' : 'unsold') + '">&#10004;</span></li>\n';
 		},
 	}
 

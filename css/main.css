@@ -26,15 +26,15 @@
  	box-sizing: border-box;  
 }
 
-.stock-list li:hover, .folder-list li:hover {
+.stock-list li:hover, .folder-list li:hover, .folder-list li.active {
 	background-color: #ddd;
 	cursor: pointer;
 }
 
 .folder-list li, .folder-wrap {
 	padding: 20px;
-	width: 70px;
-	height: 70px;
+	width: 60px;
+	height: 50px;
 	margin-right: 10px;
 	margin-bottom: 20px; 
 	float: left;
@@ -44,8 +44,8 @@
 
 .folder-wrap {
 	padding: 0;
-	height: 110px;
-	width: 110px;
+	width: 100px;
+	height: 90px;
 	margin-bottom: 0;
 	background-color: #efefef;
 	position: relative;
@@ -64,11 +64,11 @@
 	color: #ddd;
 }
 
-.folder-list li:hover:before {
+.folder-list li:hover:before, .folder-list li.active:before {
 	color: #ccc;
 }
 
-.close, .unsold {
+.close, .unsold, .sold {
 	font-size: 18px;
 	color: #333;
 	float: right;
@@ -81,15 +81,27 @@
 	color: #d80c0c;
 }
 
+.sold, .unsold {
+	margin-right: 10px;
+}
+
 .unsold {
 	color: #aaa;
 }
 
 .unsold:hover {
-	color: #333;
+	color: #55b239;
 }
 
 .sold {
+	color: #55b239;
+}
+
+.sold:hover {
+	color: #333;
+}
+.sold-li {
+	opacity: 0.5;
 }
 
 input {
@@ -136,7 +148,7 @@ input {
  	box-sizing: border-box;      
 	text-align: center;
 	background-color: #55b239;
-	padding: 8px;
+	padding: 3px;
 	border: 1px solid #55b239;
 	color: #fff !important;
 	width: 100%;
@@ -145,10 +157,6 @@ input {
 	bottom: 0;
 }
 
-
-/* emmt
-	zen coding
- */
 
  .det-list li {
  	border-bottom: 1px solid #ddd;
@@ -159,3 +167,21 @@ input {
  .header{
  	text-align: center;
  }
+
+
+.clear-sold {
+	background-color: #efefef;
+	padding: 5px;
+	cursor: pointer;
+	margin-top: 5px;
+	display: inline-block;
+}
+
+.clear-sold:hover {
+	background-color: #d80c0c;
+	color: #fff;
+}
+
+/* emmt
+	zen coding
+ */

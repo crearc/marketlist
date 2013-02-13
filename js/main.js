@@ -4,8 +4,12 @@ $(document).ready(function(){
 
 	$('.folder-list li').live('click', function() {
 		$that = $(this);
+
+		$('.folder-list li').removeClass('active');
+		$(this).addClass('active');
+
 		$('.stock-list').animate({ height: 'toggle', opacity: 'hide' }, 'fast', function() {
-			$(this).html( Stocks.getFolder( $that.text()).renderStocks() );
+			$(this).html( Stocks.getFolder($that.text()).renderStocks() );
 			$(this).animate( { height: 'toggle', opacity: 'show' }, 'fast' );
 		});
 	});
@@ -17,6 +21,21 @@ $(document).ready(function(){
 
 	$('.stock-list li').live('click', function() {
 		fetch($($(this).children(".quote")[0]).text());
+	});
+
+	$('.stock-list li .sold-js').live('click', function(e) {
+		e.preventDefault();
+		var tick = Stocks.currFolder.getTicker($(this).parent().children('.quote').text());
+		tick.toggleSold();
+		$(this).parent().after(tick.render()).remove();
+	});
+
+	$('.clear-sold').live('click', function() {
+		Stocks.currFolder.removeSold();
+		$('.stock-list').animate({ height: 'toggle', opacity: 'hide' }, 'fast', function() {
+			$(this).html( Stocks.getFolder($that.text()).renderStocks() );
+			$(this).animate( { height: 'toggle', opacity: 'show' }, 'fast' );
+		});
 	});
 
 	$('.add-item').live('click', function() {

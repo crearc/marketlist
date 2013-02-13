@@ -25,7 +25,6 @@
     // This function is called by the JavaScript code that is returned from the JSONP request
     // to the Google Finance API
     function processQuotes(data) {
-        console.log(data);
         var quote = data[0];
         var $li = $('<div></div>').html(
             "<h2>" + quote.name + " (" + quote.t +")</h2>" +
