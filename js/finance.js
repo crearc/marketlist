@@ -30,11 +30,11 @@
         var $li = $('<div></div>').html(
             "<h2>" + quote.name + " (" + quote.t +")</h2>" +
             '<ul class="det-list">' +
-            '<li>$' + quote.op + "</li>" + 
+            '<li>$' + quote.op + " (" + quote.c + ")</li>" + 
             '<li>' + quote.shares + '</li>' +
             '</ul>');
         $(".details").html("")
-            .animate( { height: 'toggle', opacity: 'toggle' }, 'fast', function() {
-                $(this).append($li).animate( { height: 'toggle', opacity: 'toggle' }, 'fast' )
+            .animate( { height: 'toggle', opacity: 'hide' }, 'fast', function() {
+                $(this).append($li).animate( { height: 'toggle', opacity: 'show' }, 'fast' );
             });
     }

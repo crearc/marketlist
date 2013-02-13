@@ -35,6 +35,7 @@
 				list = list + this.folders[fold].render();
 			}
 			$('.folder-list').html(list);
+			$('.folder-list li').first().trigger('click');
 		},
 
 		renderStocks: function() {
@@ -111,12 +112,18 @@
 
 	var Ticker = Stocker.Ticker = function(quote, folder) {
 		this.quote = quote.toUpperCase();
+		this.isSold = false;
 		//this.folder = folder;
+
 	}
 
 	Ticker.prototype = {
+		toggleSold: function() {
+			return this.isSold = !this.isSold;
+		},
+
 		render: function() {
-			return '<li><span class="quote">' + this.quote + '</span><span class="close">&#10006;</span></li>\n';
+			return '<li><span class="quote">' + this.quote + '</span><span class="sold">&#10004;</span><span class="close">&#10006;</span></li>\n';
 		},
 	}
 

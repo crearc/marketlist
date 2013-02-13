@@ -3,10 +3,10 @@ $(document).ready(function(){
 	window.Stocks = new window.Stocker();
 
 	$('.folder-list li').live('click', function() {
-		var $that = $(this);
-		$('.stock-list').animate({ height: 'toggle', opacity: 'toggle' }, 'fast', function() {
-						$(this).html( Stocks.getFolder($that.text()).renderStocks() );
-						$(this).animate( { height: 'toggle', opacity: 'toggle' }, 'fast' );
+		$that = $(this);
+		$('.stock-list').animate({ height: 'toggle', opacity: 'hide' }, 'fast', function() {
+			$(this).html( Stocks.getFolder( $that.text()).renderStocks() );
+			$(this).animate( { height: 'toggle', opacity: 'show' }, 'fast' );
 		});
 	});
 

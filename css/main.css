@@ -1,5 +1,11 @@
 #main {
-	margin-top: 100px;
+	padding-top: 20px;
+}
+
+#header {
+	margin-bottom: 40px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 20px;
 }
 
 .stock-list {	
@@ -13,43 +19,56 @@
 	font-weight: bold;
 }
 
+.stock-list li {
+	width: 100%;
+	-webkit-box-sizing: border-box; 
+  	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;  
+}
+
 .stock-list li:hover, .folder-list li:hover {
 	background-color: #ddd;
 	cursor: pointer;
 }
 
-.folder-list li, #new-folder {
+.folder-list li, .folder-wrap {
 	padding: 20px;
-	width: 80px;
-	height: 80px;
+	width: 70px;
+	height: 70px;
 	margin-right: 10px;
-	margin-bottom: 10px; 
+	margin-bottom: 20px; 
 	float: left;
 	text-align: center;
 	position: relative;
 }
 
-.folder-list li:before, #new-folder:before {
-	content: "-";
-	font-size: 40px;
-	line-height: 20px;
+.folder-wrap {
+	padding: 0;
+	height: 110px;
+	width: 110px;
+	margin-bottom: 0;
+	background-color: #efefef;
+	position: relative;
+}
+
+.folder-list li:before, .folder-wrap:before {
+	content: "_____";
+	font-size: 15px;
+	line-height: 15px;
 	width: 40px;
-	height: 20px;
+	height: 15px;
 	background-color: inherit;
 	position: absolute;
-	top: -20px;
+	top: -15px;
 	left: 0;
+	color: #ddd;
 }
 
-.folder-list li:before:hover, #new-folder:before:hover {
-	color: #d80c0c;
+.folder-list li:hover:before {
+	color: #ccc;
 }
 
-.add-folder {
-	
-}
-
-.close {
+.close, .unsold {
 	font-size: 18px;
 	color: #333;
 	float: right;
@@ -62,17 +81,34 @@
 	color: #d80c0c;
 }
 
-input {
-	padding: 10px;
-	border: 1px solid #eee;
-	background-color: #efefef;
+.unsold {
+	color: #aaa;
 }
 
-#new-item {
-	margin: 0 0 5px 0;
+.unsold:hover {
+	color: #333;
+}
+
+.sold {
+}
+
+input {
+	width: 100%;
 	-webkit-box-sizing: border-box; 
   	-moz-box-sizing: border-box;
  	box-sizing: border-box;  
+	padding: 10px;
+	border: 1px solid #eee;
+	background-color: #efefef;
+	text-align: center;
+}
+
+#new-item {
+	margin: 0;
+	-webkit-box-sizing: border-box; 
+  	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;  
+ 	width: 100%;
 }
 
 .add-item {
@@ -86,11 +122,29 @@ input {
 	color: #fff !important;
 	font-size: 30px;
 	line-height: 20px;
+	display: block;
+	margin-bottom: 5px;
 }
 
-.add-item:hover {
+.add-item:hover, add-folder:hover {
 	background-color: #84d356;
 }
+
+.add-folder {
+ 	-webkit-box-sizing: border-box; 
+  	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;      
+	text-align: center;
+	background-color: #55b239;
+	padding: 8px;
+	border: 1px solid #55b239;
+	color: #fff !important;
+	width: 100%;
+	display: block;
+	position: absolute;
+	bottom: 0;
+}
+
 
 /* emmt
 	zen coding
@@ -100,4 +154,8 @@ input {
  	border-bottom: 1px solid #ddd;
  	list-style-type: none;
  	padding: 5px;
+ }
+
+ .header{
+ 	text-align: center;
  }
