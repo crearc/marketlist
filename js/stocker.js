@@ -1,6 +1,10 @@
 (function() {
 
-
+	/*
+		Main Object that stores the data,
+		specifically holds all the folders
+		and what is active
+	*/
 	var Stocker = window.Stocker = function() {
 		this.currFolder = null;
 		this.currTicker = null;
@@ -51,9 +55,13 @@
 
 		load: function() {
 			var cache = JSON.parse( localStorage.getItem("stocker") );
+			
+			//checks if app was previously run before
 			if( !cache ) {
 				return
 			}
+
+			//loads all of the folders from local storage
 			for( f in cache.folders ) {
 				var fold = cache.folders[f];
 				this.folders[fold.fname] = new Folder(fold.key, fold.fname, fold.stocker, fold.tickers);
@@ -69,17 +77,22 @@
 		}
 	}
 
+
+	/*
+		Folder that holds a list of ticker symbols
+	*/
 	var Folder = Stocker.Folder = function(key, fname, stocker, tickers) {
 		this.key = key;
 		this.fname = fname;
 		this.tickers = {};
+		
+		// load in tickers for this folder
 		if( tickers ) {
 			for( t in tickers ) {
 				var tick = tickers[t];
 				this.tickers[tick.quote] = new Ticker(tick.quote, tick.isSold);
 			}
 		}
-		// this.stocker = stocker;
 	}
 
 
@@ -124,6 +137,10 @@
 		},
 	}
 
+
+	/*
+		Individual Symbols to be queried on the stock market
+	*/
 	var Ticker = Stocker.Ticker = function(quote, isSold) {
 		this.quote = quote.toUpperCase();
 		this.isSold = isSold || false;

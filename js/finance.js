@@ -1,3 +1,4 @@
+    //Fetch stock data for the given ticker
     function fetch(ticker) {
         // Build the URL according to the Google Finance API specification
         // Based on https://github.com/mikeplate/mobileapplab-web finance api caller
