@@ -187,6 +187,7 @@ input {
 	color: #fff;
 }
 
-/* emmt
-	zen coding
- */
+.footer {
+	margin-bottom: 15px;
+	text-align: center;
+}

@@ -1,5 +1,6 @@
 (function() {
 
+
 	var Stocker = window.Stocker = function() {
 		this.currFolder = null;
 		this.currTicker = null;
@@ -45,15 +46,15 @@
 		},
 
 		save: function() {
-			localStorage.setItem("stocker", JSON.stringify(this));
+			localStorage.setItem( "stocker", JSON.stringify(this) );
 		},
 
 		load: function() {
-			var cache = JSON.parse(localStorage.getItem("stocker"));
+			var cache = JSON.parse( localStorage.getItem("stocker") );
 			if( !cache ) {
 				return
 			}
-			for(f in cache.folders) {
+			for( f in cache.folders ) {
 				var fold = cache.folders[f];
 				this.folders[fold.fname] = new Folder(fold.key, fold.fname, fold.stocker, fold.tickers);
 			}
@@ -72,8 +73,8 @@
 		this.key = key;
 		this.fname = fname;
 		this.tickers = {};
-		if(tickers) {
-			for(t in tickers) {
+		if( tickers ) {
+			for( t in tickers ) {
 				var tick = tickers[t];
 				this.tickers[tick.quote] = new Ticker(tick.quote, tick.isSold);
 			}
@@ -103,9 +104,9 @@
 		},
 
 		removeSold: function() {
-			for(t in this.tickers) {
-				if(this.tickers[t].isSold) {
-					this.removeTicker(this.tickers[t].quote);
+			for( t in this.tickers ) {
+				if( this.tickers[t].isSold ) {
+					this.removeTicker( this.tickers[t].quote );
 				}
 			}
 		},
@@ -116,7 +117,7 @@
 
 		renderStocks: function() {
 			var list = "";
-			for(t in this.tickers) {
+			for( t in this.tickers ) {
 				list = list + this.tickers[t].render();
 			}
 			return list;
@@ -136,8 +137,10 @@
 		},
 
 		render: function() {
-			return '<li class="'+ (this.isSold ? 'sold-li' : 'unsold-li') +'"><span class="quote">' + this.quote + 
-			'</span><span class="close">&#10006;</span><span class="sold-js ' + (this.isSold ? 'sold' : 'unsold') + '">&#10004;</span></li>\n';
+			return '<li class="'+ (this.isSold ? 'sold-li' : 'unsold-li') +
+					'"><span class="quote">' + this.quote + 
+					'</span><span class="close">&#10006;</span><span class="sold-js ' + 
+					(this.isSold ? 'sold' : 'unsold') + '">&#10004;</span></li>\n';
 		},
 	}
 

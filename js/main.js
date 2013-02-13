@@ -58,6 +58,7 @@ $(document).ready(function(){
 	$('.import').live('click', function() {
 		$(this).after('<a href="#" id="import-submit">load json</a>');
 		$(this).after('<input id="import-content" placeholder="Paste JSON here" type="text">');
+		$('#import-content').hide().fadeIn();
 		$(this).remove();
 	});
 
